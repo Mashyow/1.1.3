@@ -67,13 +67,4 @@ public class Util {
         return configuration;
     }
 
-    public static void close() {
-        try {
-            Util.getSessionFactory().close();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-
 }
