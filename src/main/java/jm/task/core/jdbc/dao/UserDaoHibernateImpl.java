@@ -25,7 +25,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createSQLQuery(create_sql).executeUpdate();
             session.getTransaction().commit();
         } catch (Throwable e) {
-            throw e;
+            e.printStackTrace();
         }
     }
 
@@ -37,7 +37,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.createSQLQuery("DROP TABLE IF EXISTS users").executeUpdate();
             session.getTransaction().commit();
         } catch (Throwable e) {
-            throw e;
+            e.printStackTrace();
         }
     }
 
@@ -49,7 +49,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.save(user);
             session.getTransaction().commit();
         } catch (Throwable e) {
-            throw e;
+            e.printStackTrace();
         }
     }
 
@@ -64,14 +64,14 @@ public class UserDaoHibernateImpl implements UserDao {
 
             session.getTransaction().commit();
         } catch (Throwable e) {
-            throw e;
+            e.printStackTrace();
         }
     }
 
 
     @Override
     public List<User> getAllUsers() {
-        List<User> listUser;
+        List<User> listUser = null;
         try {
             session.beginTransaction();
             listUser = session.createQuery("FROM User").list();
@@ -82,7 +82,7 @@ public class UserDaoHibernateImpl implements UserDao {
             }
         } catch (Throwable e) {
 
-            throw e;
+            e.printStackTrace();
         }
         return listUser;
 
@@ -96,7 +96,7 @@ public class UserDaoHibernateImpl implements UserDao {
             session.getTransaction().commit();
         } catch (Throwable e) {
 
-            throw e;
+            e.printStackTrace();
         }
     }
 }
