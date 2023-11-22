@@ -54,8 +54,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public void saveUser(String name, String lastName, byte age) {
         User user = new User(name, lastName, age);
 
-        try
-                (Session session = Util.getSessionFactory().openSession()) {
+        try (Session session = Util.getSessionFactory().openSession()) {
             session.beginTransaction();
             session.save(user);
             session.getTransaction().commit();
@@ -74,7 +73,7 @@ public class UserDaoHibernateImpl implements UserDao {
         try (
                 Session session = Util.getSessionFactory().openSession()) {
             session.beginTransaction();
-            User user = (User) session.get(User.class, id);
+            User user = session.get(User.class, id);
             if (user != null) {
                 session.delete(user);
             }
