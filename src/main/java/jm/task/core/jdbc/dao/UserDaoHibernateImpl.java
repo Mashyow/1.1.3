@@ -22,7 +22,7 @@ public class UserDaoHibernateImpl implements UserDao {
         try (Session session = Util.getSessionFactory().openSession()) {
 
             transaction = session.beginTransaction();
-            String create_sql = "CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(100) NOT NULL, lastName VARCHAR(100) NOT NULL, age SMALLINT NOT NULL)";
+            String create_sql = "CREATE TABLE IF NOT EXISTS users (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(45) NOT NULL, lastName VARCHAR(45) NOT NULL, age SMALLINT NOT NULL)";
             session.createSQLQuery(create_sql).executeUpdate();
 
             transaction.commit();
@@ -89,10 +89,8 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public List<User> getAllUsers() {
         List<User> listUser = new ArrayList<>();
-
         try (Session session = Util.getSessionFactory().openSession()) {
             listUser = session.createQuery("FROM User", User.class).list();
-            session.getTransaction().commit();
             for (User user : listUser) {
                 System.out.println(user);
             }
@@ -105,8 +103,7 @@ public class UserDaoHibernateImpl implements UserDao {
 
     @Override
     public void cleanUsersTable() {
-        try
-                (Session session = Util.getSessionFactory().openSession()) {
+        try (Session session = Util.getSessionFactory().openSession()) {
             session.beginTransaction();
             session.createQuery("DELETE FROM User ").executeUpdate();
             session.getTransaction().commit();
